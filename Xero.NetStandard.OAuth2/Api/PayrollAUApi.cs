@@ -317,6 +317,29 @@ namespace Xero.NetStandard.OAuth2.Api
         /// <returns>Task of ApiResponse (LeaveApplications)</returns>
         System.Threading.Tasks.Task<ApiResponse<LeaveApplications>> GetLeaveApplicationsAsyncWithHttpInfo (string accessToken, string xeroTenantId, DateTime? ifModifiedSince = null, string where = null, string order = null, int? page = null);
         /// <summary>
+        /// Retrieves leave categories
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="Xero.NetStandard.OAuth2.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">Xero API OAuth 2.0 accessToken</param>
+        /// <param name="xeroTenantId">Xero identifier for Tenant</param>
+        /// <returns>Task of LeaveCategories</returns>
+        System.Threading.Tasks.Task<LeaveCategories> GetLeaveCategoriesAsync (string accessToken, string xeroTenantId);
+
+        /// <summary>
+        /// Retrieves leave categories
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="Xero.NetStandard.OAuth2.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">Xero API OAuth 2.0 accessToken</param>
+        /// <param name="xeroTenantId">Xero identifier for Tenant</param>
+        /// <returns>Task of ApiResponse (LeaveCategories)</returns>
+        System.Threading.Tasks.Task<ApiResponse<LeaveCategories>> GetLeaveCategoriesAsyncWithHttpInfo (string accessToken, string xeroTenantId);
+        /// <summary>
         /// Retrieves pay items
         /// </summary>
         /// <remarks>
@@ -1838,6 +1861,75 @@ namespace Xero.NetStandard.OAuth2.Api
             if (this.ExceptionFactory != null)
             {
                 Exception exception = this.ExceptionFactory("GetLeaveApplications", response);
+                if (exception != null) throw exception;
+            }
+
+            return response;
+        }
+
+
+        /// <summary>
+        /// Retrieves leave categories 
+        /// </summary>
+        /// <exception cref="Xero.NetStandard.OAuth2.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">Xero API OAuth 2.0 accessToken</param>
+        /// <param name="xeroTenantId">Xero identifier for Tenant</param>
+        /// <returns>Task of LeaveCategories</returns>
+        public async System.Threading.Tasks.Task<LeaveCategories> GetLeaveCategoriesAsync (string accessToken, string xeroTenantId)
+        {
+             Xero.NetStandard.OAuth2.Client.ApiResponse<LeaveCategories> localVarResponse = await GetLeaveCategoriesAsyncWithHttpInfo(accessToken, xeroTenantId);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Retrieves leave categories 
+        /// </summary>
+        /// <exception cref="Xero.NetStandard.OAuth2.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">Xero API OAuth 2.0 accessToken</param>
+        /// <param name="xeroTenantId">Xero identifier for Tenant</param>
+        /// <returns>Task of ApiResponse (LeaveCategories)</returns>
+        public async System.Threading.Tasks.Task<Xero.NetStandard.OAuth2.Client.ApiResponse<LeaveCategories>> GetLeaveCategoriesAsyncWithHttpInfo (string accessToken, string xeroTenantId)
+        {
+            // verify the required parameter 'xeroTenantId' is set
+            if (xeroTenantId == null)
+                throw new Xero.NetStandard.OAuth2.Client.ApiException(400, "Missing required parameter 'xeroTenantId' when calling PayrollAuApi->GetLeaveCategories");
+
+
+            Xero.NetStandard.OAuth2.Client.RequestOptions requestOptions = new Xero.NetStandard.OAuth2.Client.RequestOptions();
+
+            String[] @contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] @accepts = new String[] {
+                "application/json"
+            };
+            
+            foreach (var cType in @contentTypes)
+                requestOptions.HeaderParameters.Add("Content-Type", cType);
+            
+            foreach (var accept in @accepts)
+                requestOptions.HeaderParameters.Add("Accept", accept);
+            
+            if (xeroTenantId != null)
+                requestOptions.HeaderParameters.Add("Xero-Tenant-Id", Xero.NetStandard.OAuth2.Client.ClientUtils.ParameterToString(xeroTenantId)); // header parameter
+
+            // authentication (OAuth2) required
+            // oauth required
+            if (!String.IsNullOrEmpty(accessToken))
+            {
+                requestOptions.HeaderParameters.Add("Authorization", "Bearer " + accessToken);
+            }
+            // make the HTTP request
+
+      
+
+            var response = await this.AsynchronousClient.GetAsync<LeaveCategories>("/TypesAndCodes/LeaveCategories", requestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception exception = this.ExceptionFactory("GetLeaveCategories", response);
                 if (exception != null) throw exception;
             }
 

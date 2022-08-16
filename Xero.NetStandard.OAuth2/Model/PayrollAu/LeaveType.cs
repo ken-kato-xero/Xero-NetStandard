@@ -95,6 +95,20 @@ namespace Xero.NetStandard.OAuth2.Model.PayrollAu
         public bool? CurrentRecord { get; set; }
 
         /// <summary>
+        /// Code of the leave category
+        /// </summary>
+        /// <value>Code of the leave category</value>
+        [DataMember(Name="LeaveCategoryCode", EmitDefaultValue=false)]
+        public string LeaveCategoryCode { get; set; }
+
+        /// <summary>
+        /// Set this to indicate the leave type is exempt from superannuation guarantee contribution
+        /// </summary>
+        /// <value>Set this to indicate the leave type is exempt from superannuation guarantee contribution</value>
+        [DataMember(Name="SGCExempt", EmitDefaultValue=false)]
+        public bool? SGCExempt { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -111,6 +125,8 @@ namespace Xero.NetStandard.OAuth2.Model.PayrollAu
             sb.Append("  IsPaidLeave: ").Append(IsPaidLeave).Append("\n");
             sb.Append("  ShowOnPayslip: ").Append(ShowOnPayslip).Append("\n");
             sb.Append("  CurrentRecord: ").Append(CurrentRecord).Append("\n");
+            sb.Append("  LeaveCategoryCode: ").Append(LeaveCategoryCode).Append("\n");
+            sb.Append("  SGCExempt: ").Append(SGCExempt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -189,6 +205,16 @@ namespace Xero.NetStandard.OAuth2.Model.PayrollAu
                     this.CurrentRecord == input.CurrentRecord ||
                     (this.CurrentRecord != null &&
                     this.CurrentRecord.Equals(input.CurrentRecord))
+                ) && 
+                (
+                    this.LeaveCategoryCode == input.LeaveCategoryCode ||
+                    (this.LeaveCategoryCode != null &&
+                    this.LeaveCategoryCode.Equals(input.LeaveCategoryCode))
+                ) && 
+                (
+                    this.SGCExempt == input.SGCExempt ||
+                    (this.SGCExempt != null &&
+                    this.SGCExempt.Equals(input.SGCExempt))
                 );
         }
 
@@ -219,6 +245,10 @@ namespace Xero.NetStandard.OAuth2.Model.PayrollAu
                     hashCode = hashCode * 59 + this.ShowOnPayslip.GetHashCode();
                 if (this.CurrentRecord != null)
                     hashCode = hashCode * 59 + this.CurrentRecord.GetHashCode();
+                if (this.LeaveCategoryCode != null)
+                    hashCode = hashCode * 59 + this.LeaveCategoryCode.GetHashCode();
+                if (this.SGCExempt != null)
+                    hashCode = hashCode * 59 + this.SGCExempt.GetHashCode();
                 return hashCode;
             }
         }
